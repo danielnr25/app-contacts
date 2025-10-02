@@ -1,0 +1,11 @@
+
+table {
+  width: 100%;
+    padding: 10px;
+}
+
+.img__contact-avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
