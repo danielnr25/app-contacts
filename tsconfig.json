@@ -11,7 +11,8 @@
       "@utils/*":["src/app/utils/*"],
       "@pages/*":["src/app/pages/*"],
       "@services/*":["src/app/services/*"],
-      "@interfaces/*":["src/app/interfaces/*"]
+      "@interfaces/*":["src/app/interfaces/*"],
+      "@components/*":["src/app/components/*"]
     },
     "strict": true,
     "noImplicitOverride": true,

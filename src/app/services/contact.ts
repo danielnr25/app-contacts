@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { collection, collectionData, Firestore } from '@angular/fire/firestore';
-import Contact from '@interfaces/IContact';
+import {Contact} from '@interfaces/IContact';
 import { Observable } from 'rxjs';
 //Observable: es como una fuente de datos a la que un componente se puede suscribir (subscribe()) para recibir actualizaciones
 
@@ -18,8 +18,8 @@ export class ContactService {
 
   getAllContacts():Observable<Contact[]>{
     return collectionData(this._contactCollection,{ idField: 'id'}) as Observable<Contact[]>
-  } 
+  }
 
 
-  
+
 }
