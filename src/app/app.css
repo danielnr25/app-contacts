@@ -45,3 +45,10 @@
 .mat-column-photo {
   width: 60px;
 }
+
+
+.snackbar-success {
+  background-color: #43a047 !important; /* Verde Material */
+  color: #fff !important;
+  font-weight: 500;
+}

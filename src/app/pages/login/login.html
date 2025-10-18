@@ -1,0 +1,45 @@
+<section class="login__component">
+  <mat-card class="login-card" appearance="outlined">
+    <mat-card-header class="login-header">
+      <mat-card-title>🔐 Iniciar Sesión</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <form (ngSubmit)="login()" #loginForm="ngForm">
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Correo Electronico</mat-label>
+          <input
+            type="email"
+            matInput
+            name="email"
+            [(ngModel)]="email"
+            placeholder="ejemplo@email.com"
+            required
+          />
+          <mat-icon matSuffix>email</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full-width">
+          <mat-label>Contraseña</mat-label>
+          <input
+            type="password"
+            matInput
+            [(ngModel)]="password"
+            name="password"
+            placeholder="********"
+            required
+          />
+          <mat-icon matSuffix>lock</mat-icon>
+        </mat-form-field>
+        <div class="extras">
+            <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" mat-raised-button color="primary" class="full-width login-btn">
+          Ingresar
+        </button>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</section>

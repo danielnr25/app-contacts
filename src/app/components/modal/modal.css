@@ -1,25 +1,39 @@
-.content{
-  padding-top: 10px;
-}
-
-.row{
+.content {
+  padding: 20px;
   display: flex;
-  gap: 10px;
+  flex-direction: column;
+  gap: 16px;
 }
 
-mat-form-field{
+.row {
+  display: flex;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+mat-form-field {
   width: 100%;
 }
 
-h3{
+h3 {
   text-align: center;
-  color:#1b6eff
+  color: #1b6eff
 }
 
-.action {
-  padding:0 25px 20px;
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  border-top: 1px solid #ddd;
 }
 
-.action button{
-  flex: 1;
+.actions button {
+  font-weight: 500;
+  min-width: 120px;
+  border-radius: 8px;
+}
+
+button[mat-raised-button]{
+  color: #333;
+  background-color: #d7d5d5;
 }

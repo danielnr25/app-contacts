@@ -9,9 +9,9 @@ export class ModalService {
   private readonly _dialog = inject(MatDialog);
   constructor() {}
   // CT: tipo de componente en nuestro es Modalcomponent
-  openModal<CT,T=Contact>(componentRef:ComponentType<CT>,width:string = '400px',data?:T,isEditing=false):void{
+  openModal<CT,T=Contact>(componentRef:ComponentType<CT>,width:string = '800px',data?:T,isEditing=false):void{
     const config = {data, isEditing}
-    this._dialog.open(componentRef,{width,data:config})
+    this._dialog.open(componentRef,{width,data:config,maxWidth:'800px'})
   }
 
   closeModal():void{

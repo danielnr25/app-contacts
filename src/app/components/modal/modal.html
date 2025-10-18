@@ -1,9 +1,69 @@
-
 <div mat-dialog-title>
   <h3>{{ getTitle() }} CONTACTO</h3>
 </div>
 
-<mat-dialog-actions class="actions">
-  <button matButton >Cancelar</button>
-  <button matButton>{{ getTitle() }}</button>
-</mat-dialog-actions>
+<form [formGroup]="contactForm">
+  <div class="content" mat-dialog-content>
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" formControlName="firstname"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido</mat-label>
+        <input matInput type="text" formControlName="lastname"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="text" formControlName="email"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telefono</mat-label>
+        <input matInput type="text" formControlName="phone"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>País</mat-label>
+        <mat-select formControlName="country">
+          <mat-option *ngFor="let element of countries" [value]="element">{{ element }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Trabajo</mat-label>
+        <input matInput type="text" formControlName="job" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Compañía</mat-label>
+        <input matInput type="text" formControlName="company"/>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline">
+        <mat-label>Dirección</mat-label>
+        <input matInput type="text" formControlName="address"/>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Sitio Web</mat-label>
+        <input matInput type="text" formControlName="website"/>
+      </mat-form-field>
+    </div>
+
+    <div mat-dialog-actions class="actions">
+      <button mat-raised-button type="button" [mat-dialog-close]="false">Cancelar</button>
+      <button mat-flat-button>{{ getTitle() }}</button>
+    </div>
+  </div>
+</form>
