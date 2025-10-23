@@ -1,0 +1,9 @@
+
+<section>
+  <mat-card>
+    <mat-card-content>
+      <app-toolbar (OnNewContactEvent)="onClickNewContact()"></app-toolbar>
+    </mat-card-content>
+  </mat-card>
+  <app-list-contacts [data]="contacts"></app-list-contacts>
+</section>

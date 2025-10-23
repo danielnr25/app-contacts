@@ -56,7 +56,7 @@ export class ListContacts<DATA> implements OnInit,AfterViewInit{
   deletedContact(id:string):void{
     const confirmation = confirm(APP_CONSTANTS.MESSAGES.CONFIRMATION_PROMPT);
     if(confirmation){
-      console.log('Eliminando');
+      this._contactSvc.deleteContact(id);
       this._snackBarSvc.openSnackBar(APP_CONSTANTS.MESSAGES.CONTACT_DELETED,'ok')
     }else{
       return

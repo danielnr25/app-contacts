@@ -12,7 +12,8 @@
       "@pages/*":["src/app/pages/*"],
       "@services/*":["src/app/services/*"],
       "@interfaces/*":["src/app/interfaces/*"],
-      "@components/*":["src/app/components/*"]
+      "@components/*":["src/app/components/*"],
+      "@guards/*":["src/app/guards/*"]
     },
     "strict": true,
     "noImplicitOverride": true,

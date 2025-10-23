@@ -1,7 +1,10 @@
-import { Component, output } from '@angular/core';
+import { Component, inject, output } from '@angular/core';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
+import { AuthService } from '@services/auth';
+import { Router } from '@angular/router';
+import { SnackBar } from '@shared/services/snack-bar';
 
 const MATERIAL_IMPORTS = [MatToolbarModule,MatIconModule,MatButtonModule]
 
@@ -23,6 +26,10 @@ const MATERIAL_IMPORTS = [MatToolbarModule,MatIconModule,MatButtonModule]
         <mat-icon>add_box</mat-icon>
         <span>Nuevo</span>
       </a>
+      <a mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon>
+        <span>Cerrar Sesión</span>
+      </a>
 
     </mat-toolbar>
   `,
@@ -36,7 +43,23 @@ export class Toolbar {
   // decorador para emitir eventos hacia el componente padre
   OnNewContactEvent = output<void>();
 
+  private readonly _authService = inject(AuthService);
+  private readonly _router = inject(Router);
+  private readonly _snackBar = inject(SnackBar);
+
+
   emitClick():void{
     this.OnNewContactEvent.emit(); // emitir el evento cuando se hace un clic en el botón nuevo
+  }
+
+  logout():void{
+    this._authService.logout().subscribe({
+      next:()=>{
+        this._router.navigate(['/login']);
+      },
+      error:(err)=>{
+        this._snackBar.openSnackBar('Error al cerrar sesión: '+ err.message,'ok');
+      }
+    })
   }
 }
