@@ -11,7 +11,7 @@
     <ng-container matColumnDef="photo">
       <th mat-header-cell *matHeaderCellDef> Imagen </th>
       <td mat-cell *matCellDef="let element">
-        <img src="{{element.photo}}" alt="Avatar" class="img__contact-avatar">
+        <img src="{{element.photo}} || 'assets/img/default_photo.jpg'" alt="Avatar" class="img__contact-avatar">
       </td>
     </ng-container>
       <ng-container matColumnDef="firstname">
