@@ -29,3 +29,10 @@ table {
 .btn-danger{
   color: oklch(63.7% 0.237 25.331);
 }
+
+
+.filter-input-container {
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ddd;
+}

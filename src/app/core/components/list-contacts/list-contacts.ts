@@ -6,15 +6,18 @@ import { MatIconModule } from '@angular/material/icon';
 import {Contact} from '@interfaces/IContact'
 import { ContactService } from '@services/contact';
 import { CommonModule } from '@angular/common';
-import { ModalService } from '@components/modal/modal.service';
-import { Modal } from '@components/modal/modal';
+import { ModalService } from '@core/components/modal/modal.service';
+import { Modal } from '@core/components/modal/modal';
 import { APP_CONSTANTS } from '@shared/constants';
 import { SnackBar } from '@shared/services/snack-bar';
+import { FilterInput } from '@components/filter-input/filter-input';
+import { DialogService } from '@services/dialog';
+//import { AuthService } from '@services/auth';
 
 const MATERIAL_IMPORTS = [MatTableModule,MatPaginatorModule,MatButtonModule,MatIconModule];
 @Component({
   selector: 'app-list-contacts',
-  imports: [MATERIAL_IMPORTS,CommonModule],
+  imports: [MATERIAL_IMPORTS,CommonModule,FilterInput],
   templateUrl: './list-contacts.html',
   styleUrl: './list-contacts.css'
 })
@@ -33,15 +36,31 @@ export class ListContacts<DATA> implements OnInit,AfterViewInit{
   private readonly _contactSvc = inject(ContactService);
   private readonly _modalSvc = inject(ModalService);
   private readonly _snackBarSvc = inject(SnackBar);
+  private readonly _dialogSvc = inject(DialogService);
+  //private readonly _authSvc = inject(AuthService);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   ngOnInit():void{
+    /* const user = this._authSvc.currentUser;
+    console.log(user?.email);
+    console.log(user?.uid);
+    console.log(user?.displayName);
+    console.log('Antes de ingresar'); */
     this._contactSvc.getAllContacts().subscribe(data =>{
       //console.log(data);
       //console.log('datos cargando ... ngOnInit');
       this.dataSource.data = data;
     })
+    this.dataSource.filterPredicate = (contact: Contact, filter: string) => {
+      const fullName = `${contact.firstname} ${contact.lastname}`.toLowerCase();
+      const email = contact.email?.toLowerCase() || '';
+      return (
+        fullName.includes(filter)
+        || email.includes(filter)
+      );
+    };
+
   }
 
   ngAfterViewInit(): void {
@@ -53,14 +72,20 @@ export class ListContacts<DATA> implements OnInit,AfterViewInit{
     this._modalSvc.openModal<Modal,DATA>(Modal,'800px',data,true)
   }
 
-  deletedContact(id:string):void{
-    const confirmation = confirm(APP_CONSTANTS.MESSAGES.CONFIRMATION_PROMPT);
-    if(confirmation){
-      this._contactSvc.deleteContact(id);
-      this._snackBarSvc.openSnackBar(APP_CONSTANTS.MESSAGES.CONTACT_DELETED,'ok')
-    }else{
-      return
+  async deletedContact(id: string): Promise<void> {
+    const confirmed = await this._dialogSvc.openConfirmDialog(
+      APP_CONSTANTS.MESSAGES.CONFIRM_DELETION,
+      APP_CONSTANTS.MESSAGES.CONFIRMATION_PROMPT
+    );
+
+    if (confirmed) {
+      await this._contactSvc.deleteContact(id);
+      this._snackBarSvc.openSnackBar(APP_CONSTANTS.MESSAGES.CONTACT_DELETED, 'ok');
     }
+  }
+
+  onFilterChanged(filterValue: string): void {
+    this.dataSource.filter = filterValue;
   }
 
 }

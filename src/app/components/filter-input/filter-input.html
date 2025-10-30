@@ -1,0 +1,11 @@
+<mat-form-field appearance="outline" class="w-full">
+  <mat-label>Buscar contacto</mat-label>
+  <input
+    matInput
+    (keyup)="applyFilter($event)"
+    placeholder="Buscar por nombre..."
+  />
+  <button mat-icon-button matSuffix *ngIf="false">
+    <mat-icon>search</mat-icon>
+  </button>
+</mat-form-field>
